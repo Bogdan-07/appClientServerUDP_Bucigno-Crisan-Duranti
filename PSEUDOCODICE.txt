@@ -1,0 +1,34 @@
+ALGORITMO Principale_Server_Musicale
+    INIZIALIZZA socket UDP sulla porta 9876
+    STAMPA "In ascolto..."
+
+    CICLO INFINITO:
+        ATTENDI ricezione pacchetto dal Client
+        ESTRAI messaggio, IP e Porta del mittente
+        
+        SE messaggio (ignorando maiuscole) == "READY" ALLORA
+            STAMPA "Richiesta ricevuta da " + IP_Client
+            
+            APRI finestra per selezionare file audio
+            
+            SE l'utente ha selezionato un file ALLORA
+                FILE = file_selezionato
+                STAMPA "Inizio invio: " + NOME_FILE
+                
+                APRI stream di lettura byte dal FILE
+                CICLO FINCHÉ ci sono byte da leggere:
+                    LEGGI blocco di 1024 byte
+                    CREA DatagramPacket con il blocco
+                    INVIA pacchetto a IP_Client : Porta_Client
+                    ATTENDI 2-3 millisecondi (controllo congestione)
+                FINE CICLO FINCHÉ
+                
+                INVIA pacchetto contenente "END" (segno di chiusura)
+                STAMPA "Trasferimento completato"
+                CHIUDI stream file
+            ALTRIMENTI
+                STAMPA "Selezione annullata"
+            FINE SE
+        FINE SE
+    FINE CICLO
+FINE ALGORITMO
