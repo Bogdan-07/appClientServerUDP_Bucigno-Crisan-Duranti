@@ -1,7 +1,5 @@
 1. Analisi Tecnica: Architettura e Flusso (Bucigno)
 
-Questa analisi è ideale per una documentazione che spiega "come funziona" il software nel suo insieme.
-
 Descrizione Generale: Il progetto realizza un sistema di trasferimento file audio basato su protocollo UDP. Il sistema è composto da un Server che gestisce l'archivio e un Client che riceve e salva il brano.
 
 Protocollo di Comunicazione: Viene utilizzato il protocollo UDP (User Datagram Protocol). A differenza del TCP, non c'è una connessione persistente; il Server invia "pacchetti" di dati all'indirizzo del Client senza attendere conferme di ricezione (ACK).
